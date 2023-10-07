@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+  <H1>Demonstration page is as follows: </H1>
+
+  <A href="chat.html"> chat page </A>
+  
+  <H1>To see the effect of button, Please enable developer mode. </H1>
+
+    <input type="button" id="sample" value="Send hello">
+
+    <script>
+        // var sock = new WebSocket('ws://127.0.0.1:3000');
+	var protocol = location.protocol;
+	var host = location.host;
+	console.log(protocol);
+	if(protocol == "https:") { protocol = "wss:"} else { protocol = "ws:" };
+	var url = protocol+"//"+host;
+	console.log(url);
+        var sock = new WebSocket(url);
+
+        // 接続
+        sock.addEventListener('open',function(e){
+            console.log('Socket 接続成功');
+        });
+
+        // サーバーからデータを受け取る
+        sock.addEventListener('message',function(e){
+            console.log(e.data);
+        });
+
+        document.addEventListener('DOMContentLoaded',function(e){
+            // サーバーにデータを送る
+            document.getElementById('sample').addEventListener('click',function(e){
+                sock.send('hello');
+            });
+        });
+    </script>
+</body>
+</html>
