@@ -1,2 +1,3 @@
 # SimpleWebSocket
-Example for websocket
+Example for websocket, by K. Umemura, TUT
+
